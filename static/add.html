@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>增加学生</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">学生成绩系统</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/">学生列表</a></li>
+                <li class="active"><a href="/add">增加学生</a></li>
+            </ul>
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+    <div class="container">
+        <form id="biaodan">
+            <p>学号：<input type="text" name="xuehao"/></p>
+            <p>姓名：<input type="text" name="xingming"/></p>
+            <p>性别：
+                <input type="radio" name="xingbie" value="男" checked/> 男
+                <input type="radio" name="xingbie" value="女"/> 女
+            </p>
+            <p>
+                年龄：
+                <input type="number" name="nianling"/>
+            </p>
+            <p>
+                语文成绩：
+                <input type="text" name="yuwen"/>
+            </p>
+            <p>
+                数学成绩：
+                <input type="text" name="shuxue"/>
+            </p>
+            <p>
+                <input type="button" value="提交" id="tijiao"/>
+            </p>
+        </form>
+    </div>
+
+
+    <script type="text/javascript" src="/js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/underscore-min.js"></script>
+
+    <script type="text/javascript">
+        $("#tijiao").click(function(){
+           var str =  $("form").serialize();
+
+            $.get("/doadd?" + str , function(data){
+                if(data.jieguo == 1){
+                    alert("插入成功");
+                    $("input[type=text]").val("");
+                }else if(data.jieguo == -2){
+                    alert("抱歉，学号冲突！！！");
+                }else if(data.jieguo == -1){
+                    alert("抱歉，服务器错误！！");
+                }
+            });
+        })
+    </script>
+</body>
+</html>

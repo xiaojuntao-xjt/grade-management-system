@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>学生成绩系统</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <style>
+        th,td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">学生成绩系统</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">学生列表</a></li>
+                <li><a href="/add">增加学生</a></li>
+            </ul>
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+    <div class="container">
+            <table class="table  table-striped">
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>语文成绩</th>
+                    <th>数学成绩</th>
+                    <th>操作</th>
+                </tr>
+            </table>
+    </div>
+
+    <script type="text/template" id="moban">
+        <tr>
+            <td><%=xuehao%></td>
+            <td><%=xingming%></td>
+            <td><%=nianling%></td>
+            <td><%=xingbie%></td>
+            <td><%=yuwen%></td>
+            <td><%=shuxue%></td>
+            <td><a class="del" href="javascript:void(0)">删除</a></td>
+        </tr>
+    </script>
+
+    <script type="text/javascript" src="/js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/underscore-min.js"></script>
+
+    <script type="text/javascript">
+        var mobanstring = $("#moban").html();//模版字符串
+
+        var compileFunction = _.template(mobanstring);//生成函数
+
+        $.get("/all",function(dataobj){
+            _.each(dataobj.jieguo,function(data){
+                var html = compileFunction(data);
+                $("table").append($(html));
+            });
+            console.log('111');
+        });
+
+        //删除操作
+//        $(function(){
+//            console.log($('.del').length);
+//            $('.del').click(function(){
+//                alert(kk);
+//            })
+//        })
+
+
+
+        setTimeout(function(){
+            var l = $('.del').length;
+            console.log(l);
+            $('.del').each(function(k ,v){
+                //console.log(k);
+                $('.del').eq(k).click(function(){
+                    //alert(k);
+
+                    $.get("/del",function(dataobj){
+                        _.each(dataobj.jieguo,function(data){
+                            var html = compileFunction(data);
+                            $("table").append($(html));
+                        });
+                    });
+
+
+                })
+            });
+
+
+
+
+        },500);
+
+
+    </script>
+</body>
+</html>
