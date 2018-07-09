@@ -1,8 +1,8 @@
 node+mongodb
-
+update 2018
 webstorm
 
-Á¬½ÓmongodbÊý¾Ý¿â£¨mongodb://localhost:27017/chengjiguanlixitong£©
+ï¿½ï¿½ï¿½ï¿½mongodbï¿½ï¿½ï¿½Ý¿â£¨mongodb://localhost:27017/chengjiguanlixitongï¿½ï¿½
 
-	1¡¢Æô¶¯MongoDB
-	2¡¢webstormÔËÐÐapp.js£¬¿ªÆô·þÎñ
+	1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½MongoDB
+	2ï¿½ï¿½webstormï¿½ï¿½ï¿½ï¿½app.jsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
